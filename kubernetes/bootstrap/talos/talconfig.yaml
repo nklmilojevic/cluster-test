@@ -27,21 +27,20 @@ nodes:
     ipAddress: "10.4.0.2"
     installDiskSelector:
       serial: "AA000000000000003390"
-    talosImageURL: factory.talos.dev/installer/0fc211f59fdc2c4ba540da59cd57796b877a8a8e124737bfa31e8cf75737cfa2
+    talosImageURL: factory.talos.dev/installer/b5464202f2f70ab676e8a14e2b771980a25f8d26f72df9b8e025edcba593eb9e
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "f8:b4:6a:b1:5a:bf"
-        vlans:
-          - vlanId: 4
-            addresses:
-              - "10.4.0.2/24"
-            mtu: 1500
-            routes:
-              - network: 0.0.0.0/0
-                gateway: "10.4.0.1"
-            vip:
-              ip: "10.4.0.3"
+        dhcp: false
+        addresses:
+          - "10.4.0.2/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "10.4.0.1"
+        mtu: 1500
+        vip:
+          ip: "10.4.0.3"
 
 # Global patches
 patches:
