@@ -46,10 +46,7 @@ nodes:
                 gateway: 10.4.0.1
           - vlanId: 10
             dhcp: false
-            addresses:
-              - 10.3.0.199/24
             mtu: 1500
-            routes: []
 
 # Global patches
 patches:
