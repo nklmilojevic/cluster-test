@@ -25,13 +25,7 @@ spec:
       echo-server:
         pod:
           annotations:
-            k8s.v1.cni.cncf.io/networks: |
-              [{
-                "name":"multus-iot",
-                "namespace": "network",
-                "ips": ["10.3.0.233/24"],
-                "mac": "f8:b4:6a:b1:5a:cc"
-              }]
+            k8s.v1.cni.cncf.io/networks: static-iot-echo
         strategy: RollingUpdate
         containers:
           app:
