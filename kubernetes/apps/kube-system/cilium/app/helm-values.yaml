@@ -1,8 +1,9 @@
 ---
 autoDirectNodeRoutes: true
 bpf:
-  masquerade: false # Required for Talos `.machine.features.hostDNS.forwardKubeDNSToHost`
-  vlanBypass: [0]
+  hostLegacyRouting: true
+  masquerade: true
+  tproxy: true
 cgroup:
   automount:
     enabled: false
