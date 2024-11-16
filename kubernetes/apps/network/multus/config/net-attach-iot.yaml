@@ -12,7 +12,6 @@ spec:
         {
           "type": "ipvlan",
           "master": "eno1.10",
-          "mode": "bridge",
           "capabilities": {
             "ips": true
           },
