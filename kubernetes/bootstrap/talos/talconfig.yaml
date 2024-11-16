@@ -30,17 +30,26 @@ nodes:
     talosImageURL: factory.talos.dev/installer/b5464202f2f70ab676e8a14e2b771980a25f8d26f72df9b8e025edcba593eb9e
     controlPlane: true
     networkInterfaces:
-      - deviceSelector:
-          hardwareAddr: "f8:b4:6a:b1:5a:bf"
-        dhcp: false
-        addresses:
-          - "10.4.0.2/24"
-        routes:
-          - network: 0.0.0.0/0
-            gateway: "10.4.0.1"
+      - interface: eno1
         mtu: 1500
+        dhcp: false
         vip:
           ip: "10.4.0.3"
+        vlans:
+          - vlanId: 4
+            dhcp: false
+            addresses:
+              - 10.4.0.2/24
+            mtu: 1500
+            routes:
+              - network: 0.0.0.0/0
+                gateway: 10.4.0.1
+          - vlanId: 10
+            dhcp: false
+            addresses:
+              - 10.3.0.199/24
+            mtu: 1500
+            routes: []
 
 # Global patches
 patches:
@@ -61,4 +70,3 @@ controlPlane:
     - "@./patches/controller/cluster.yaml"
     - "@./patches/controller/disable-admission-controller.yaml"
     - "@./patches/controller/etcd.yaml"
-
