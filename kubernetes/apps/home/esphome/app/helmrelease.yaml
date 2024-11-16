@@ -23,12 +23,7 @@ spec:
 
         pod:
           annotations:
-            k8s.v1.cni.cncf.io/networks: |
-              [{
-                "name":"multus-iot",
-                "namespace": "network",
-                "ips": ["10.3.0.117/24"]
-              }]
+            k8s.v1.cni.cncf.io/networks: static-iot-esp
 
         containers:
           app:
