@@ -29,7 +29,8 @@ spec:
               [{
                 "name":"multus-iot",
                 "namespace": "network",
-                "ips": ["10.3.0.151/24"]
+                "ips": ["10.3.0.111/24"],
+                "mac": "3e:59:e4:f7:43:08"
               }]
         strategy: RollingUpdate
         containers:
