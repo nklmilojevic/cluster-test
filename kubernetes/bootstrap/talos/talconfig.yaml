@@ -33,8 +33,6 @@ nodes:
       - interface: eno1
         mtu: 1500
         dhcp: false
-        vip:
-          ip: "10.4.0.3"
         vlans:
           - vlanId: 4
             dhcp: false
@@ -44,6 +42,8 @@ nodes:
             routes:
               - network: 0.0.0.0/0
                 gateway: 10.4.0.1
+            vip:
+              ip: "10.4.0.3"
           - vlanId: 10
             dhcp: false
             mtu: 1500
