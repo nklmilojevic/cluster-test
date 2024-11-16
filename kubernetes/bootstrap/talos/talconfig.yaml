@@ -6,7 +6,7 @@ talosVersion: v1.8.3
 kubernetesVersion: v1.31.2
 
 clusterName: "home-kubernetes"
-endpoint: https://10.2.0.200:6443
+endpoint: https://10.5.0.200:6443
 
 clusterPodNets:
   - "10.69.0.0/16"
@@ -14,7 +14,7 @@ clusterSvcNets:
   - "10.96.0.0/16"
 
 additionalApiServerCertSans: &sans
-  - "10.2.0.200"
+  - "10.5.0.200"
   - "127.0.0.1"
 additionalMachineCertSans: *sans
 
@@ -32,16 +32,15 @@ nodes:
     networkInterfaces:
       - deviceSelector:
           hardwareAddr: "f8:b4:6a:b1:5a:bf"
-        vlans:
-          - vlanId: 20
-            addresses:
-              - "10.5.0.113/24"
-            mtu: 1500
-            routes:
-              - network: 0.0.0.0/0
-                gateway: "10.5.0.1"
-            vip:
-              ip: "10.2.0.200"
+        dhcp: false
+        addresses:
+          - "10.5.0.113/24"
+        routes:
+          - network: 0.0.0.0/0
+            gateway: "10.5.0.1"
+        mtu: 1500
+        vip:
+          ip: "10.5.0.200"
 
 # Global patches
 patches:
