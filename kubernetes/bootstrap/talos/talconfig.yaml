@@ -30,9 +30,15 @@ nodes:
     talosImageURL: factory.talos.dev/installer/b5464202f2f70ab676e8a14e2b771980a25f8d26f72df9b8e025edcba593eb9e
     controlPlane: true
     networkInterfaces:
-      - interface: eno1
-        mtu: 1500
+      - interface: bond0
+        bond:
+          mode: 802.3ad
+          xmitHashPolicy: layer3+4
+          miimon: 1000
+          deviceSelectors:
+            - hardwareAddr: "f8:b4:6a:b1:5a:bf"
         dhcp: false
+        mtu: 1500
         vlans:
           - vlanId: 4
             dhcp: false
@@ -45,6 +51,8 @@ nodes:
             vip:
               ip: "10.4.0.3"
           - vlanId: 10
+            addresses:
+              - 10.3.0.199/24
             dhcp: false
             mtu: 1500
 
