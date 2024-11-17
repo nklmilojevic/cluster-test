@@ -6,8 +6,6 @@ metadata:
   name: &appname multus
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: cilium
   targetNamespace: network
   commonMetadata:
     labels:
