@@ -32,11 +32,9 @@ nodes:
     networkInterfaces:
       - interface: bond0
         bond:
-          mode: 802.3ad
-          xmitHashPolicy: layer3+4
-          miimon: 1000
+          mode: active-backup
           deviceSelectors:
-            - hardwareAddr: "f8:b4:6a:b1:5a:bf"
+            - driver: e1000e
         dhcp: false
         mtu: 1500
         vlans:
@@ -55,6 +53,15 @@ nodes:
               - 10.3.0.199/24
             dhcp: false
             mtu: 1500
+    schematic: &schematic
+      customization:
+        extraKernelArgs:
+          - net.ifnames=0
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/i915-ucode
+            - siderolabs/intel-ucode
+            - siderolabs/nut-client
 
 # Global patches
 patches:
