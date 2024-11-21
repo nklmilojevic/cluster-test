@@ -26,24 +26,21 @@ nodes:
   - hostname: "icarus001"
     ipAddress: "10.4.0.2"
     installDiskSelector:
-      serial: "AA000000000000003390"
+      size: "<256GB"
     talosImageURL: factory.talos.dev/installer/b5464202f2f70ab676e8a14e2b771980a25f8d26f72df9b8e025edcba593eb9e
     controlPlane: true
     networkInterfaces:
-      - interface: eno1
+      - interface: enp3s0
         mtu: 1500
         dhcp: false
+        addresses:
+          - 10.4.0.2/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 10.4.0.1
+        vip:
+          ip: "10.4.0.3"
         vlans:
-          - vlanId: 4
-            dhcp: false
-            addresses:
-              - 10.4.0.2/24
-            mtu: 1500
-            routes:
-              - network: 0.0.0.0/0
-                gateway: 10.4.0.1
-            vip:
-              ip: "10.4.0.3"
           - vlanId: 10
             dhcp: false
             addresses:
@@ -51,13 +48,13 @@ nodes:
             mtu: 1500
     schematic:
       customization:
-        extraKernelArgs:
-          - net.ifnames=0
+        # extraKernelArgs:
+        #   - net.ifnames=1
         systemExtensions:
           officialExtensions:
             - siderolabs/i915-ucode
             - siderolabs/intel-ucode
-            - siderolabs/nut-client
+            # - siderolabs/nut-client
 # Global patches
 patches:
   - "@./patches/global/cluster-discovery.yaml"
