@@ -16,3 +16,14 @@ resources:
   - ./ingress-nginx.yaml
   - ./k8s-gateway.yaml
   - ./angelnu.yaml
+  - ./bitnami.yaml
+  - ./cloudnative-pg.yaml
+  - ./dragonfly.yaml
+  - ./external-secrets.yaml
+  - ./grafana.yaml
+  - ./intel.yaml
+  - ./k8stz.yaml
+  - ./nfs-subdir-external-provisioner.yaml
+  - ./node-feature-discovery.yaml
+  - ./vector-chart.yaml
+  - ./victoriametrics.yaml

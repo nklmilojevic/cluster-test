@@ -24,7 +24,7 @@ cniConfig:
 
 nodes:
   - hostname: "icarus001"
-    ipAddress: "10.4.0.2"
+    ipAddress: "10.4.0.200"
     installDiskSelector:
       size: "<256GB"
     talosImageURL: factory.talos.dev/installer/b5464202f2f70ab676e8a14e2b771980a25f8d26f72df9b8e025edcba593eb9e
@@ -32,19 +32,14 @@ nodes:
     networkInterfaces:
       - interface: enp3s0
         mtu: 1500
-        dhcp: false
-        addresses:
-          - 10.4.0.2/24
-        routes:
-          - network: 0.0.0.0/0
-            gateway: 10.4.0.1
+        dhcp: true
         vip:
           ip: "10.4.0.3"
         vlans:
           - vlanId: 10
             dhcp: false
             addresses:
-              - 10.3.0.199/24
+              - 10.3.0.200/24
             mtu: 1500
     schematic:
       customization:
