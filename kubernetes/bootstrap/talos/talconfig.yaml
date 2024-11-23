@@ -14,7 +14,7 @@ clusterSvcNets:
   - "10.96.0.0/16"
 
 additionalApiServerCertSans: &sans
-  - "10.4.0.3"
+  - &talosControlplaneVip 10.4.0.3
   - "127.0.0.1"
 additionalMachineCertSans: *sans
 
@@ -26,21 +26,31 @@ nodes:
   - hostname: "icarus001"
     ipAddress: "10.4.0.200"
     installDiskSelector:
-      size: "<256GB"
-    talosImageURL: factory.talos.dev/installer/b5464202f2f70ab676e8a14e2b771980a25f8d26f72df9b8e025edcba593eb9e
+      size: "<300GB"
+    talosImageURL: factory.talos.dev/installer/848bbd72d0a758da9842dec64c8393aa8d9b8c0402eedf1a524eff061ddef7fc
     controlPlane: true
     networkInterfaces:
-      - interface: enp3s0
-        mtu: 1500
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - hardwareAddr: "68:1d:ef:49:93:6d"
+              driver: r8169
         dhcp: true
         vip:
-          ip: "10.4.0.3"
+          ip: *talosControlplaneVip
         vlans:
+          - vlanId: 1
+            dhcp: false
+            addresses:
+              - 10.5.0.200/24
+            mtu: 1500
           - vlanId: 10
             dhcp: false
             addresses:
               - 10.3.0.200/24
             mtu: 1500
+
     schematic:
       customization:
         # extraKernelArgs:
@@ -48,8 +58,90 @@ nodes:
         systemExtensions:
           officialExtensions:
             - siderolabs/i915-ucode
+            - siderolabs/intel-ice-firmware
             - siderolabs/intel-ucode
-            # - siderolabs/nut-client
+            - siderolabs/mei
+            - siderolabs/util-linux-tools
+
+  - hostname: "icarus002"
+    ipAddress: "10.4.0.201"
+    installDiskSelector:
+      size: "<300GB"
+    talosImageURL: factory.talos.dev/installer/848bbd72d0a758da9842dec64c8393aa8d9b8c0402eedf1a524eff061ddef7fc
+    controlPlane: true
+    networkInterfaces:
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - hardwareAddr: ""
+              driver: e1000e
+        dhcp: true
+        vip:
+          ip: *talosControlplaneVip
+        vlans:
+          - vlanId: 1
+            dhcp: false
+            addresses:
+              - 10.5.0.201/24
+            mtu: 1500
+          - vlanId: 10
+            dhcp: false
+            addresses:
+              - 10.3.0.201/24
+            mtu: 1500
+
+    schematic:
+      customization:
+        # extraKernelArgs:
+        #   - net.ifnames=1
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/i915-ucode
+            - siderolabs/intel-ice-firmware
+            - siderolabs/intel-ucode
+            - siderolabs/mei
+            - siderolabs/util-linux-tools
+
+  - hostname: "icarus003"
+    ipAddress: "10.4.0.202"
+    installDiskSelector:
+      size: "<300GB"
+    talosImageURL: factory.talos.dev/installer/848bbd72d0a758da9842dec64c8393aa8d9b8c0402eedf1a524eff061ddef7fc
+    controlPlane: true
+    networkInterfaces:
+      - interface: bond0
+        bond:
+          mode: active-backup
+          deviceSelectors:
+            - hardwareAddr: "c4:65:16:aa:f9:7b"
+              driver: e1000e
+        dhcp: true
+        vip:
+          ip: *talosControlplaneVip
+        vlans:
+          - vlanId: 1
+            dhcp: false
+            addresses:
+              - 10.5.0.202/24
+            mtu: 1500
+          - vlanId: 10
+            dhcp: false
+            addresses:
+              - 10.3.0.202/24
+            mtu: 1500
+
+    schematic:
+      customization:
+        # extraKernelArgs:
+        #   - net.ifnames=1
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/i915-ucode
+            - siderolabs/intel-ice-firmware
+            - siderolabs/intel-ucode
+            - siderolabs/mei
+            - siderolabs/util-linux-tools
 # Global patches
 patches:
   - "@./patches/global/cluster-discovery.yaml"
