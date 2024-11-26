@@ -31,14 +31,10 @@ spec:
         mayastor:
           enabled: true
     mayastor:
-      localpv-provisioner:
-        # -- Enables the openebs dynamic-localpv-provisioner. If disabled, modify etcd and loki-stack storage class accordingly.
-        enabled: true
-        hostpathClass:
-          # -- Enable default hostpath localpv StorageClass.
+      etcd:
+        localpvScConfig:
           enabled: false
-        analytics:
-          enabled: false
+
     # openebs-crds:
     #   csi:
     #     volumeSnapshots:
