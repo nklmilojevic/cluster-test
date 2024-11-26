@@ -42,9 +42,9 @@ spec:
         image:
           registry: quay.io/
       hostpathClass:
-        enabled: true
+        enabled: false
         name: openebs-hostpath
-        isDefaultClass: true
+        isDefaultClass: false
         basePath: /var/openebs/local
     # Refer to https://github.com/openebs/mayastor-extensions/blob/v2.7.1/chart/values.yaml for complete set of values.
     mayastor:
@@ -65,13 +65,11 @@ spec:
           # Name of etcd's localpv hostpath storage class.
           name: "mayastor-etcd-localpv"
           # -- Host path where local etcd data is stored in.
-          basePath: "/var/local/{{ .Release.Name }}"
+          basePath: "/var/local/openebs/localpv-hostpath/etcd"
           # -- ReclaimPolicy of etcd's localpv hostpath storage class.
           reclaimPolicy: Delete
           # -- VolumeBindingMode of etcd's localpv hostpath storage class.
           volumeBindingMode: WaitForFirstConsumer
         # Pod labels; okay to remove the openebs logging label if required
-      localpv-provisioner:
-        enabled: false
       crds:
         enabled: true
