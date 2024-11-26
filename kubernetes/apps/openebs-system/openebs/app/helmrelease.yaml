@@ -33,7 +33,7 @@ spec:
     mayastor:
       etcd:
         localpvScConfig:
-          enabled: true
+          enabled: false
           name: "openebs-hostpath"
           basePath: "/var/local/openebs"
       csi:
