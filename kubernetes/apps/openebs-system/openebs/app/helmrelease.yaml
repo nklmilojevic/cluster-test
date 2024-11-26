@@ -42,7 +42,7 @@ spec:
         image:
           registry: quay.io/
       hostpathClass:
-        enabled: false
+        enabled: true
         name: openebs-hostpath
         isDefaultClass: true
         basePath: /var/openebs/local
@@ -65,7 +65,6 @@ spec:
           # Name of etcd's localpv hostpath storage class.
           name: "mayastor-etcd-localpv"
           # -- Host path where local etcd data is stored in.
-          basePath: "/var/local/openebs"
           # -- ReclaimPolicy of etcd's localpv hostpath storage class.
           reclaimPolicy: Delete
           # -- VolumeBindingMode of etcd's localpv hostpath storage class.
