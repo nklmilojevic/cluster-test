@@ -35,7 +35,7 @@ spec:
         enabled: false
       etcd:
         localpvScConfig:
-          enabled: true
+          enabled: false
           basePath: /var/openebs/local
       csi:
         node:
