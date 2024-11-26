@@ -29,24 +29,11 @@ spec:
           enabled: false
       replicated:
         mayastor:
-          enabled: true
-    mayastor:
-      loki-stack:
-        enabled: false
-      etcd:
-        localpvScConfig:
           enabled: false
-          basePath: /var/openebs/local
+    openebs-crds:
       csi:
-        node:
-          initContainers:
-            enabled: false
-      io_engine:
-        envcontext: "--iova-mode=pa"
-    # openebs-crds:
-    #   csi:
-    #     volumeSnapshots:
-    #       enabled: false
+        volumeSnapshots:
+          enabled: false
     localpv-provisioner:
       localpv:
         image:
