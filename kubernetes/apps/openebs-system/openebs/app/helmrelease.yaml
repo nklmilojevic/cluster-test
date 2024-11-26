@@ -35,7 +35,7 @@ spec:
         localpvScConfig:
           enabled: true
           name: "openebs-local"
-          basePath: "/var/local/openebs"
+          basePath: ""
       csi:
         node:
           initContainers:
