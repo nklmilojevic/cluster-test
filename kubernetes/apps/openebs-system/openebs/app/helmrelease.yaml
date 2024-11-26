@@ -40,29 +40,21 @@ spec:
         node:
           initContainers:
             enabled: false
-      localpv-provisioner:
-        # -- Enables the openebs dynamic-localpv-provisioner. If disabled, modify etcd and loki-stack storage class accordingly.
-        enabled: true
-        hostpathClass:
-          # -- Enable default hostpath localpv StorageClass.
-          enabled: true
-        analytics:
-          enabled: false
       io_engine:
         envcontext: "--iova-mode=pa"
     # openebs-crds:
     #   csi:
     #     volumeSnapshots:
     #       enabled: false
-    # localpv-provisioner:
-    #   localpv:
-    #     image:
-    #       registry: quay.io/
-    #   helperPod:
-    #     image:
-    #       registry: quay.io/
-    #   hostpathClass:
-    #     enabled: true
-    #     name: openebs-hostpath
-    #     isDefaultClass: false
-    #     basePath: /var/openebs/local
+    localpv-provisioner:
+      localpv:
+        image:
+          registry: quay.io/
+      helperPod:
+        image:
+          registry: quay.io/
+      hostpathClass:
+        enabled: true
+        name: openebs-hostpath
+        isDefaultClass: false
+        basePath: /var/openebs/local
