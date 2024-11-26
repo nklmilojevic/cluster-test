@@ -30,46 +30,19 @@ spec:
       replicated:
         mayastor:
           enabled: true
-    openebs-crds:
-      csi:
-        volumeSnapshots:
-          enabled: false
-    localpv-provisioner:
-      localpv:
-        image:
-          registry: quay.io/
-      helperPod:
-        image:
-          registry: quay.io/
-      hostpathClass:
-        enabled: false
-        name: openebs-hostpath
-        isDefaultClass: false
-        basePath: /var/openebs/local
-    # Refer to https://github.com/openebs/mayastor-extensions/blob/v2.7.1/chart/values.yaml for complete set of values.
-    mayastor:
-      obs:
-        callhome:
-          enabled: false
-      loki-stack:
-        enabled: false
-      csi:
-        node:
-          initContainers:
-            enabled: true
-      etcd:
-        # -- Kubernetes Cluster Domain
-        clusterDomain: cluster.local
-        localpvScConfig:
-          enabled: true
-          # Name of etcd's localpv hostpath storage class.
-          name: "mayastor-etcd-localpv"
-          # -- Host path where local etcd data is stored in.
-          basePath: "/var/local/openebs/localpv-hostpath/etcd"
-          # -- ReclaimPolicy of etcd's localpv hostpath storage class.
-          reclaimPolicy: Delete
-          # -- VolumeBindingMode of etcd's localpv hostpath storage class.
-          volumeBindingMode: WaitForFirstConsumer
-        # Pod labels; okay to remove the openebs logging label if required
-      crds:
-        enabled: true
+    # openebs-crds:
+    #   csi:
+    #     volumeSnapshots:
+    #       enabled: false
+    # localpv-provisioner:
+    #   localpv:
+    #     image:
+    #       registry: quay.io/
+    #   helperPod:
+    #     image:
+    #       registry: quay.io/
+    #   hostpathClass:
+    #     enabled: true
+    #     name: openebs-hostpath
+    #     isDefaultClass: false
+    #     basePath: /var/openebs/local
