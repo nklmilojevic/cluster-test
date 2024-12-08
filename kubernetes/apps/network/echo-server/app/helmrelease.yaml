@@ -61,12 +61,12 @@ spec:
                 cpu: 10m
               limits:
                 memory: 64Mi
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: false
-        runAsUser: 0
-        runAsGroup: 0
-        seccompProfile: { type: RuntimeDefault }
+    # defaultPodOptions:
+    #   securityContext:
+    #     runAsNonRoot: false
+    #     runAsUser: 0
+    #     runAsGroup: 0
+    #     seccompProfile: { type: RuntimeDefault }
     service:
       app:
         controller: echo-server
@@ -94,3 +94,6 @@ spec:
                 service:
                   identifier: app
                   port: http
+    persistence:
+      blah:
+        existingClaim: blah
